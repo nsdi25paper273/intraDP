@@ -1,6 +1,6 @@
-[submodule "third_parties/kapao"]
-	path = third_parties/kapao
-	url = https://github.com/wmcnally/kapao
-[submodule "third_parties/AGRNav"]
-	path = third_parties/AGRNav
+[submodule "kapao"]
+	path = kapao
+	url = https://github.com/wmcnally/kapao.git
+[submodule "AGRNav"]
+	path = AGRNav
 	url = https://github.com/jmwang0117/AGRNav.git
