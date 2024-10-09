@@ -1,0 +1,179 @@
+[W kineto_shim.cpp:372] Profiler is not initialized: skipping step() invocation
+STAGE:2024-09-17 20:04:07 1889592:1889592 ActivityProfilerController.cpp:312] Completed Stage: Warm Up
+STAGE:2024-09-17 20:04:07 1889592:1889592 ActivityProfilerController.cpp:318] Completed Stage: Collection
+STAGE:2024-09-17 20:04:07 1889592:1889592 ActivityProfilerController.cpp:322] Completed Stage: Post Processing
+Configuring torch to use deterministic behaviors.
+parallel approach select
+constraint_latency False
+starting ParallelCollaborativeInference server...
+Serving on ('0.0.0.0', 12345)
+Ctrl on ('0.0.0.0', 12346)
+server for ('192.168.50.102', 39184): client connected.
+server for ('192.168.50.102', 39184): model SCONet_0M_192.168.50.102 initial complete.
+server for ('192.168.50.102', 39184): recv init input from client
+Input size 8.0004MB
+Forwarding for 0(+2 warmup and 3 repeat) times for initialization.
+Forward of the original model takes average 0.0397s.
+pickle.dumps size to time poly: 
+          2
+3.13e-19 x + 1.368e-09 x - 0.0004033
+pickle.loads size to time poly: 
+           2
+2.411e-19 x + 1.073e-09 x - 0.001195
+Output size 1.0004MB
+Local random exec takes average 0.0350s.
+Using torch.profiler for op profile
+Operator records (align ops time with factor 1.1364): 
+0 _start: input_from: [], output_to: [1], output_shapes: [torch.Size([1, 1, 256, 32, 128])], barrier: True, local dim: 4;  accu_time 0.0000s
+1 squeeze: input_from: [0], output_to: [2], output_shapes: [torch.Size([1, 256, 32, 128])], barrier: False, local dim: 3;  accu_time 0.0000s
+2 permute: input_from: [1], output_to: [3], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0000s
+3 conv2d: input_from: [2], output_to: [4], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0003s
+4 relu: input_from: [3], output_to: [5], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0003s
+5 conv2d: input_from: [4], output_to: [6], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0004s
+6 relu: input_from: [5], output_to: [7, 37], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0004s
+7 max_pool2d: input_from: [6], output_to: [8], output_shapes: [torch.Size([1, 32, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0004s
+8 conv2d: input_from: [7], output_to: [9], output_shapes: [torch.Size([1, 48, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0005s
+9 relu: input_from: [8], output_to: [10], output_shapes: [torch.Size([1, 48, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0005s
+10 conv2d: input_from: [9], output_to: [11], output_shapes: [torch.Size([1, 48, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0006s
+11 relu: input_from: [10], output_to: [12, 30], output_shapes: [torch.Size([1, 48, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0006s
+12 max_pool2d: input_from: [11], output_to: [13], output_shapes: [torch.Size([1, 48, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0006s
+13 conv2d: input_from: [12], output_to: [14], output_shapes: [torch.Size([1, 64, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0006s
+14 relu: input_from: [13], output_to: [15], output_shapes: [torch.Size([1, 64, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0006s
+15 conv2d: input_from: [14], output_to: [16], output_shapes: [torch.Size([1, 64, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0007s
+16 relu: input_from: [15], output_to: [17, 24], output_shapes: [torch.Size([1, 64, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0007s
+17 max_pool2d: input_from: [16], output_to: [18], output_shapes: [torch.Size([1, 64, 32, 16])], barrier: False, local dim: 3;  accu_time 0.0008s
+18 conv2d: input_from: [17], output_to: [19], output_shapes: [torch.Size([1, 80, 32, 16])], barrier: False, local dim: 3;  accu_time 0.0008s
+19 relu: input_from: [18], output_to: [20], output_shapes: [torch.Size([1, 80, 32, 16])], barrier: False, local dim: 3;  accu_time 0.0008s
+20 conv2d: input_from: [19], output_to: [21], output_shapes: [torch.Size([1, 80, 32, 16])], barrier: False, local dim: 3;  accu_time 0.0009s
+21 relu: input_from: [20], output_to: [22], output_shapes: [torch.Size([1, 80, 32, 16])], barrier: False, local dim: 3;  accu_time 0.0009s
+22 conv2d: input_from: [21], output_to: [23, 29, 36], output_shapes: [torch.Size([1, 4, 32, 16])], barrier: False, local dim: 3;  accu_time 0.0010s
+23 conv_transpose2d: input_from: [22], output_to: [24], output_shapes: [torch.Size([1, 4, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0011s
+24 cat: input_from: [23, 16], output_to: [25], output_shapes: [torch.Size([1, 68, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0011s
+25 conv2d: input_from: [24], output_to: [26], output_shapes: [torch.Size([1, 64, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0012s
+26 relu: input_from: [25], output_to: [27], output_shapes: [torch.Size([1, 64, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0012s
+27 conv2d: input_from: [26], output_to: [28, 35], output_shapes: [torch.Size([1, 8, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0013s
+28 conv_transpose2d: input_from: [27], output_to: [30], output_shapes: [torch.Size([1, 8, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0013s
+29 conv_transpose2d: input_from: [22], output_to: [30], output_shapes: [torch.Size([1, 4, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0014s
+30 cat: input_from: [28, 11, 29], output_to: [31], output_shapes: [torch.Size([1, 60, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0014s
+31 conv2d: input_from: [30], output_to: [32], output_shapes: [torch.Size([1, 48, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0015s
+32 relu: input_from: [31], output_to: [33], output_shapes: [torch.Size([1, 48, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0015s
+33 conv2d: input_from: [32], output_to: [34], output_shapes: [torch.Size([1, 16, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0016s
+34 conv_transpose2d: input_from: [33], output_to: [37], output_shapes: [torch.Size([1, 16, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0018s
+35 conv_transpose2d: input_from: [27], output_to: [37], output_shapes: [torch.Size([1, 8, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0019s
+36 conv_transpose2d: input_from: [22], output_to: [37], output_shapes: [torch.Size([1, 4, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0019s
+37 cat: input_from: [34, 6, 35, 36], output_to: [38], output_shapes: [torch.Size([1, 60, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0019s
+38 conv2d: input_from: [37], output_to: [39], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0021s
+39 relu: input_from: [38], output_to: [40], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0021s
+40 __getitem__: input_from: [39], output_to: [41], output_shapes: [torch.Size([1, 1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0021s
+41 conv3d: input_from: [40], output_to: [42], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0033s
+42 relu: input_from: [41], output_to: [43, 48, 54, 60], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0035s
+43 conv3d: input_from: [42], output_to: [44], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0067s
+44 batch_norm: input_from: [43], output_to: [45], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0075s
+45 relu: input_from: [44], output_to: [46], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0077s
+46 conv3d: input_from: [45], output_to: [47], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0109s
+47 batch_norm: input_from: [46], output_to: [53], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0116s
+48 conv3d: input_from: [42], output_to: [49], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0164s
+49 batch_norm: input_from: [48], output_to: [50], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0171s
+50 relu: input_from: [49], output_to: [51], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0173s
+51 conv3d: input_from: [50], output_to: [52], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0221s
+52 batch_norm: input_from: [51], output_to: [53], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0228s
+53 add_: input_from: [47, 52], output_to: [59], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0231s
+54 conv3d: input_from: [42], output_to: [55], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0279s
+55 batch_norm: input_from: [54], output_to: [56], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0286s
+56 relu: input_from: [55], output_to: [57], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0288s
+57 conv3d: input_from: [56], output_to: [58], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0335s
+58 batch_norm: input_from: [57], output_to: [59], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0343s
+59 add_: input_from: [53, 58], output_to: [60], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0346s
+60 add: input_from: [59, 42], output_to: [61], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0349s
+61 relu: input_from: [60], output_to: [62], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0352s
+62 conv3d: input_from: [61], output_to: [63], output_shapes: [torch.Size([1, 20, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0393s
+63 permute: input_from: [62], output_to: [64], output_shapes: [torch.Size([1, 20, 256, 32, 128])], barrier: False, local dim: 4;  accu_time 0.0393s
+64 argmax: input_from: [63], output_to: [65], output_shapes: [torch.Size([1, 256, 32, 128])], barrier: False, local dim: 3;  accu_time 0.0396s
+65 type: input_from: [64], output_to: [66], output_shapes: [torch.Size([1, 256, 32, 128])], barrier: False, local dim: 3;  accu_time 0.0397s
+66 _end: input_from: [65], output_to: [-1], output_shapes: [torch.Size([1, 256, 32, 128])], barrier: True, local dim: None;  accu_time 0.0397s
+total 67 ops (filtered from 73 ops); time 0.0397s (aligned by 1.1364 sleep_step 20).
+
+Computing plan for client.
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 1MB 4.0209/0.5609:  10%|█         | 53/512 [00:00<00:06, 66.15it/s]bandwidth 1MB 4.0209/0.5609:  11%|█         | 54/512 [00:00<00:06, 67.39it/s]bandwidth 1MB 3.6865/0.5609:  11%|█         | 54/512 [00:00<00:06, 67.39it/s]bandwidth 1MB 3.6214/0.5609:  12%|█▏        | 62/512 [00:00<00:06, 67.39it/s]bandwidth 1MB 1.6933/0.5609:  12%|█▏        | 63/512 [00:00<00:06, 67.39it/s]bandwidth 1MB 0.7593/0.5609:  87%|████████▋ | 447/512 [00:00<00:00, 67.39it/s]bandwidth 1MB 0.5609/0.5609: 100%|█████████▉| 511/512 [00:00<00:00, 67.39it/s]bandwidth 1MB 0.5609/0.5609: 100%|██████████| 512/512 [00:00<00:00, 587.21it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 2MB 2.0406/0.5609:  10%|█         | 53/512 [00:00<00:00, 6084.69it/s]bandwidth 2MB 1.8734/0.5609:  11%|█         | 54/512 [00:00<00:00, 5947.65it/s]bandwidth 2MB 1.8426/0.5609:  12%|█▏        | 62/512 [00:00<00:00, 5730.05it/s]bandwidth 2MB 0.8652/0.5609:  12%|█▏        | 63/512 [00:00<00:00, 5609.26it/s]bandwidth 2MB 0.5439/0.5609:  87%|████████▋ | 447/512 [00:00<00:00, 6429.21it/s]bandwidth 2MB 0.5439/0.5609: 100%|██████████| 512/512 [00:00<00:00, 6483.95it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 3MB 1.3805/0.5609:  10%|█         | 53/512 [00:00<00:00, 6340.87it/s]bandwidth 3MB 1.2690/0.5609:  11%|█         | 54/512 [00:00<00:00, 6158.37it/s]bandwidth 3MB 1.2497/0.5609:  12%|█▏        | 62/512 [00:00<00:00, 5990.07it/s]bandwidth 3MB 0.5892/0.5609:  12%|█▏        | 63/512 [00:00<00:00, 5856.67it/s]bandwidth 3MB 0.5439/0.5609:  87%|████████▋ | 447/512 [00:00<00:00, 6498.60it/s]bandwidth 3MB 0.5439/0.5609: 100%|██████████| 512/512 [00:00<00:00, 6558.30it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 4MB 1.0504/0.5609:  10%|█         | 53/512 [00:00<00:00, 6386.59it/s]bandwidth 4MB 0.9668/0.5609:  11%|█         | 54/512 [00:00<00:00, 6201.87it/s]bandwidth 4MB 0.9533/0.5609:  12%|█▏        | 62/512 [00:00<00:00, 6034.41it/s]bandwidth 4MB 0.4511/0.5609:  12%|█▏        | 63/512 [00:00<00:00, 5907.87it/s]bandwidth 4MB 0.4511/0.5609: 100%|██████████| 512/512 [00:00<00:00, 6603.76it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 5MB 0.8524/0.8007:  10%|█         | 53/512 [00:00<00:00, 6391.00it/s]bandwidth 5MB 0.7855/0.8007:  11%|█         | 54/512 [00:00<00:00, 6205.44it/s]bandwidth 5MB 0.7754/0.8007:  12%|█▏        | 62/512 [00:00<00:00, 6037.35it/s]bandwidth 5MB 0.3683/0.8007:  12%|█▏        | 63/512 [00:00<00:00, 5900.74it/s]bandwidth 5MB 0.3683/0.8007: 100%|██████████| 512/512 [00:00<00:00, 6460.93it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 6MB 0.7204/0.7569:  10%|█         | 53/512 [00:00<00:00, 6347.57it/s]bandwidth 6MB 0.6646/0.7569:  11%|█         | 54/512 [00:00<00:00, 6163.90it/s]bandwidth 6MB 0.6568/0.7569:  12%|█▏        | 62/512 [00:00<00:00, 6002.24it/s]bandwidth 6MB 0.3131/0.7569:  12%|█▏        | 63/512 [00:00<00:00, 5868.37it/s]bandwidth 6MB 0.3131/0.7569: 100%|██████████| 512/512 [00:00<00:00, 6554.90it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 7MB 0.6261/0.7930:  10%|█         | 53/512 [00:00<00:00, 6438.38it/s]bandwidth 7MB 0.5783/0.7930:  11%|█         | 54/512 [00:00<00:00, 6250.14it/s]bandwidth 7MB 0.5721/0.7930:  12%|█▏        | 62/512 [00:00<00:00, 6077.00it/s]bandwidth 7MB 0.2737/0.7930:  12%|█▏        | 63/512 [00:00<00:00, 5938.27it/s]bandwidth 7MB 0.2737/0.7930: 100%|██████████| 512/512 [00:00<00:00, 6612.87it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 8MB 0.5553/0.7030:  10%|█         | 53/512 [00:00<00:00, 6373.23it/s]bandwidth 8MB 0.5135/0.7030:  11%|█         | 54/512 [00:00<00:00, 6186.63it/s]bandwidth 8MB 0.5086/0.7030:  12%|█▏        | 62/512 [00:00<00:00, 6016.82it/s]bandwidth 8MB 0.2441/0.7030:  12%|█▏        | 63/512 [00:00<00:00, 5880.65it/s]bandwidth 8MB 0.2441/0.7030: 100%|██████████| 512/512 [00:00<00:00, 6597.25it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 9MB 0.5003/0.6330:  10%|█         | 53/512 [00:00<00:00, 6044.49it/s]bandwidth 9MB 0.4632/0.6330:  11%|█         | 54/512 [00:00<00:00, 5879.10it/s]bandwidth 9MB 0.4592/0.6330:  12%|█▏        | 62/512 [00:00<00:00, 5744.99it/s]bandwidth 9MB 0.2211/0.6330:  12%|█▏        | 63/512 [00:00<00:00, 5618.09it/s]bandwidth 9MB 0.2211/0.6330: 100%|██████████| 512/512 [00:00<00:00, 6534.52it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 10MB 0.4563/0.5770:  10%|█         | 53/512 [00:00<00:00, 6370.67it/s]bandwidth 10MB 0.4229/0.5770:  11%|█         | 54/512 [00:00<00:00, 6187.47it/s]bandwidth 10MB 0.4196/0.5770:  12%|█▏        | 62/512 [00:00<00:00, 5980.70it/s]bandwidth 10MB 0.2027/0.5770:  12%|█▏        | 63/512 [00:00<00:00, 5846.43it/s]bandwidth 10MB 0.2027/0.5770: 100%|██████████| 512/512 [00:00<00:00, 6443.42it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 11MB 0.4203/0.5312:  10%|█         | 53/512 [00:00<00:00, 6338.70it/s]bandwidth 11MB 0.3899/0.5312:  11%|█         | 54/512 [00:00<00:00, 6151.01it/s]bandwidth 11MB 0.3873/0.5312:  12%|█▏        | 62/512 [00:00<00:00, 5984.69it/s]bandwidth 11MB 0.1876/0.5312:  12%|█▏        | 63/512 [00:00<00:00, 5860.69it/s]bandwidth 11MB 0.1876/0.5312: 100%|██████████| 512/512 [00:00<00:00, 6544.75it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 12MB 0.3903/0.4930:  10%|█         | 53/512 [00:00<00:00, 6237.32it/s]bandwidth 12MB 0.3625/0.4930:  11%|█         | 54/512 [00:00<00:00, 6061.62it/s]bandwidth 12MB 0.3604/0.4930:  12%|█▏        | 62/512 [00:00<00:00, 5901.17it/s]bandwidth 12MB 0.1751/0.4930:  12%|█▏        | 63/512 [00:00<00:00, 5770.97it/s]bandwidth 12MB 0.1751/0.4930: 100%|██████████| 512/512 [00:00<00:00, 6484.22it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 13MB 0.3649/0.4607:  10%|█         | 53/512 [00:00<00:00, 6304.36it/s]bandwidth 13MB 0.3392/0.4607:  11%|█         | 54/512 [00:00<00:00, 6124.56it/s]bandwidth 13MB 0.3376/0.4607:  12%|█▏        | 62/512 [00:00<00:00, 5966.43it/s]bandwidth 13MB 0.1645/0.4607:  12%|█▏        | 63/512 [00:00<00:00, 5833.01it/s]bandwidth 13MB 0.1645/0.4607: 100%|██████████| 512/512 [00:00<00:00, 6477.77it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 14MB 0.3432/0.4330:  10%|█         | 53/512 [00:00<00:00, 6131.69it/s]bandwidth 14MB 0.3193/0.4330:  11%|█         | 54/512 [00:00<00:00, 5987.74it/s]bandwidth 14MB 0.3180/0.4330:  12%|█▏        | 62/512 [00:00<00:00, 5843.22it/s]bandwidth 14MB 0.1554/0.4330:  12%|█▏        | 63/512 [00:00<00:00, 5756.39it/s]bandwidth 14MB 0.1554/0.4330: 100%|██████████| 512/512 [00:00<00:00, 5798.76it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 15MB 0.3243/0.4090:  10%|█         | 53/512 [00:00<00:00, 6291.34it/s]bandwidth 15MB 0.3020/0.4090:  11%|█         | 54/512 [00:00<00:00, 6156.53it/s]bandwidth 15MB 0.3011/0.4090:  12%|█▏        | 62/512 [00:00<00:00, 6030.63it/s]bandwidth 15MB 0.1475/0.4090:  12%|█▏        | 63/512 [00:00<00:00, 5929.61it/s]bandwidth 15MB 0.1475/0.4090: 100%|██████████| 512/512 [00:00<00:00, 6551.02it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 16MB 0.3078/0.3880:  10%|█         | 53/512 [00:00<00:00, 6296.86it/s]bandwidth 16MB 0.2869/0.3880:  11%|█         | 54/512 [00:00<00:00, 6163.06it/s]bandwidth 16MB 0.2862/0.3880:  12%|█▏        | 62/512 [00:00<00:00, 6036.23it/s]bandwidth 16MB 0.1406/0.3880:  12%|█▏        | 63/512 [00:00<00:00, 5934.67it/s]bandwidth 16MB 0.1406/0.3880: 100%|██████████| 512/512 [00:00<00:00, 6490.59it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 17MB 0.2932/0.3695:  10%|█         | 53/512 [00:00<00:00, 6241.52it/s]bandwidth 17MB 0.2736/0.3695:  11%|█         | 54/512 [00:00<00:00, 6113.82it/s]bandwidth 17MB 0.2732/0.3695:  12%|█▏        | 62/512 [00:00<00:00, 5996.42it/s]bandwidth 17MB 0.1345/0.3695:  12%|█▏        | 63/512 [00:00<00:00, 5899.16it/s]bandwidth 17MB 0.1345/0.3695: 100%|██████████| 512/512 [00:00<00:00, 6501.34it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 18MB 0.2803/0.3530:  10%|█         | 53/512 [00:00<00:00, 6270.93it/s]bandwidth 18MB 0.2617/0.3530:  11%|█         | 54/512 [00:00<00:00, 6136.18it/s]bandwidth 18MB 0.2615/0.3530:  12%|█▏        | 62/512 [00:00<00:00, 6010.70it/s]bandwidth 18MB 0.1291/0.3530:  12%|█▏        | 63/512 [00:00<00:00, 5910.25it/s]bandwidth 18MB 0.1291/0.3530: 100%|██████████| 512/512 [00:00<00:00, 6581.44it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 19MB 0.2687/0.3383:  10%|█         | 53/512 [00:00<00:00, 6259.63it/s]bandwidth 19MB 0.2511/0.3383:  11%|█         | 54/512 [00:00<00:00, 6127.71it/s]bandwidth 19MB 0.1242/0.3383:  12%|█▏        | 63/512 [00:00<00:00, 5945.22it/s]bandwidth 19MB 0.1242/0.3383: 100%|██████████| 512/512 [00:00<00:00, 6451.44it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 20MB 0.2583/0.3251:  10%|█         | 53/512 [00:00<00:00, 6400.57it/s]bandwidth 20MB 0.2416/0.3251:  11%|█         | 54/512 [00:00<00:00, 6262.06it/s]bandwidth 20MB 0.1199/0.3251:  12%|█▏        | 63/512 [00:00<00:00, 6082.34it/s]bandwidth 20MB 0.1199/0.3251: 100%|██████████| 512/512 [00:00<00:00, 6654.82it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 21MB 0.2489/0.3279:  10%|█         | 53/512 [00:00<00:00, 6389.53it/s]bandwidth 21MB 0.2329/0.3279:  11%|█         | 54/512 [00:00<00:00, 6251.52it/s]bandwidth 21MB 0.1159/0.3279:  12%|█▏        | 63/512 [00:00<00:00, 6079.68it/s]bandwidth 21MB 0.1159/0.3279: 100%|██████████| 512/512 [00:00<00:00, 6633.44it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 22MB 0.2403/0.3156:  10%|█         | 53/512 [00:00<00:00, 6341.05it/s]bandwidth 22MB 0.2251/0.3156:  11%|█         | 54/512 [00:00<00:00, 6204.08it/s]bandwidth 22MB 0.1124/0.3156:  12%|█▏        | 63/512 [00:00<00:00, 6006.85it/s]bandwidth 22MB 0.1124/0.3156: 100%|██████████| 512/512 [00:00<00:00, 6601.22it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 23MB 0.2325/0.3044:  10%|█         | 53/512 [00:00<00:00, 6455.96it/s]bandwidth 23MB 0.2179/0.3044:  11%|█         | 54/512 [00:00<00:00, 6311.44it/s]bandwidth 23MB 0.1091/0.3044:  12%|█▏        | 63/512 [00:00<00:00, 6120.80it/s]bandwidth 23MB 0.1091/0.3044: 100%|██████████| 512/512 [00:00<00:00, 6615.91it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 24MB 0.2253/0.2941:  10%|█         | 53/512 [00:00<00:00, 6281.91it/s]bandwidth 24MB 0.2114/0.2941:  11%|█         | 54/512 [00:00<00:00, 6149.34it/s]bandwidth 24MB 0.1061/0.2941:  12%|█▏        | 63/512 [00:00<00:00, 5986.16it/s]bandwidth 24MB 0.1061/0.2941: 100%|██████████| 512/512 [00:00<00:00, 6551.30it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 25MB 0.2187/0.2844:  10%|█         | 53/512 [00:00<00:00, 6402.04it/s]bandwidth 25MB 0.2053/0.2844:  11%|█         | 54/512 [00:00<00:00, 6263.96it/s]bandwidth 25MB 0.1033/0.2844:  12%|█▏        | 63/512 [00:00<00:00, 6065.03it/s]bandwidth 25MB 0.1033/0.2844: 100%|██████████| 512/512 [00:00<00:00, 6590.45it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 26MB 0.2126/0.2755:  10%|█         | 53/512 [00:00<00:00, 6389.71it/s]bandwidth 26MB 0.1997/0.2755:  11%|█         | 54/512 [00:00<00:00, 6251.00it/s]bandwidth 26MB 0.1008/0.2755:  12%|█▏        | 63/512 [00:00<00:00, 6074.93it/s]bandwidth 26MB 0.1008/0.2755: 100%|██████████| 512/512 [00:00<00:00, 6630.16it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 27MB 0.2070/0.2673:  10%|█         | 53/512 [00:00<00:00, 6388.98it/s]bandwidth 27MB 0.1946/0.2673:  11%|█         | 54/512 [00:00<00:00, 6251.69it/s]bandwidth 27MB 0.0984/0.2673:  12%|█▏        | 63/512 [00:00<00:00, 6073.81it/s]bandwidth 27MB 0.0984/0.2673: 100%|██████████| 512/512 [00:00<00:00, 6625.09it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 28MB 0.2017/0.2596:  10%|█         | 53/512 [00:00<00:00, 6330.93it/s]bandwidth 28MB 0.1898/0.2596:  11%|█         | 54/512 [00:00<00:00, 6197.12it/s]bandwidth 28MB 0.0962/0.2596:  12%|█▏        | 63/512 [00:00<00:00, 6024.38it/s]bandwidth 28MB 0.0962/0.2596: 100%|██████████| 512/512 [00:00<00:00, 6611.20it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 29MB 0.1968/0.2371:  10%|█         | 53/512 [00:00<00:00, 6437.45it/s]bandwidth 29MB 0.1853/0.2371:  11%|█         | 54/512 [00:00<00:00, 6297.40it/s]bandwidth 29MB 0.0942/0.2371:  12%|█▏        | 63/512 [00:00<00:00, 6116.13it/s]bandwidth 29MB 0.0942/0.2371: 100%|██████████| 512/512 [00:00<00:00, 6558.90it/s]
+  0%|          | 0/512 [00:00<?, ?it/s]bandwidth 30MB 0.1923/0.2298:  10%|█         | 53/512 [00:00<00:00, 6302.75it/s]bandwidth 30MB 0.1811/0.2298:  11%|█         | 54/512 [00:00<00:00, 6163.06it/s]bandwidth 30MB 0.0923/0.2298:  12%|█▏        | 63/512 [00:00<00:00, 6006.16it/s]bandwidth 30MB 0.0923/0.2298: 100%|██████████| 512/512 [00:00<00:00, 6626.13it/s]
+Task exception was never retrieved
+future: <Task finished name='Task-8' coro=<ParallelCollaborativeInference.start_server.<locals>._serve() done, defined at /home/user/project/ParallelCollaborativeInference/ParallelCollaborativeInference/src.py:157> exception=TypeError('expected Tensor as element 1 in argument 0, but got NoneType')>
+Traceback (most recent call last):
+  File "/home/user/project/ParallelCollaborativeInference/ParallelCollaborativeInference/src.py", line 179, in _serve
+    raise e
+  File "/home/user/project/ParallelCollaborativeInference/ParallelCollaborativeInference/src.py", line 173, in _serve
+    await self.start_common_loop(model.forward, None, None,
+  File "/home/user/project/ParallelCollaborativeInference/ParallelCollaborativeInference/src.py", line 442, in start_common_loop
+    await random_exec_compiled(profile_result, last_bandwidth)
+  File "/home/user/project/ParallelCollaborativeInference/ParallelCollaborativeInference/random_exec.py", line 210, in random_exec_compiled
+    await exec_func(*args)
+  File "/home/user/project/ParallelCollaborativeInference/ParallelCollaborativeInference/random_exec.py", line 102, in merged_plain_exec
+    intermediates: torch.Tensor = p.func(*args, **kwargs)
+TypeError: expected Tensor as element 1 in argument 0, but got NoneType
+Number of local ops 65
+Number of global ops -66
+server for ('192.168.50.102', 39184): init forward complete.
+bw 0MB/s offload at [] recv at [] sleep for 0 ops est time 0.5609s.
+bw 1MB/s offload at [] recv at [] sleep for 0 ops est time 0.5609s.
+bw 2MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.5439s.
+bw 3MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.5439s.
+bw 4MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.4511s.
+bw 5MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.3683s.
+bw 6MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.3131s.
+bw 7MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.2737s.
+bw 8MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.2441s.
+bw 9MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.2211s.
+bw 10MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.2027s.
+bw 11MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1876s.
+bw 12MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1751s.
+bw 13MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1645s.
+bw 14MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1554s.
+bw 15MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1475s.
+bw 16MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1406s.
+bw 17MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1345s.
+bw 18MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1291s.
+bw 19MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1242s.
+bw 20MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1199s.
+bw 21MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1159s.
+bw 22MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1124s.
+bw 23MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1091s.
+bw 24MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1061s.
+bw 25MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1033s.
+bw 26MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1008s.
+bw 27MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.0984s.
+bw 28MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.0962s.
+bw 29MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.0942s.
+bw 30MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.0923s.
+Started send loop.
+Started recv loop.
+server for ('192.168.50.102', 39184): Init: send took 4.49e-02s (0.0406MB, 1 items), recv took 3.68e-01s (11.2789MB, (5 items)), dumps took 7.68e-04s, loads took 1.50e-02s total 0.4289s bandwidth 27.3990MB/s, first send at 1726574717.9193513, last send at 1726574717.9193513, first recv at 1726574633.1442914, last recv at 1726574714.5381298
+expected Tensor as element 1 in argument 0, but got NoneType
+Stopped server.

@@ -1,0 +1,149 @@
+[W kineto_shim.cpp:372] Profiler is not initialized: skipping step() invocation
+STAGE:2024-09-17 21:36:56 2005945:2005945 ActivityProfilerController.cpp:312] Completed Stage: Warm Up
+STAGE:2024-09-17 21:36:56 2005945:2005945 ActivityProfilerController.cpp:318] Completed Stage: Collection
+STAGE:2024-09-17 21:36:56 2005945:2005945 ActivityProfilerController.cpp:322] Completed Stage: Post Processing
+Configuring torch to use deterministic behaviors.
+parallel approach select
+constraint_latency False
+starting ParallelCollaborativeInference server...
+Serving on ('0.0.0.0', 12345)
+Ctrl on ('0.0.0.0', 12346)
+server for ('192.168.50.102', 49704): client connected.
+server for ('192.168.50.102', 49704): model SCONet_0M_192.168.50.102 initial complete.
+server for ('192.168.50.102', 49704): recv init input from client
+Input size 8.0004MB
+Forwarding for 0(+2 warmup and 3 repeat) times for initialization.
+Forward of the original model takes average 0.0411s.
+pickle.dumps size to time poly: 
+           2
+2.929e-19 x + 1.363e-09 x - 0.0004622
+pickle.loads size to time poly: 
+           2
+1.867e-19 x + 1.074e-09 x - 0.001214
+Output size 1.0004MB
+Local random exec takes average 0.0382s.
+Using torch.profiler for op profile
+Operator records (align ops time with factor 1.1810): 
+0 _start: input_from: [], output_to: [1], output_shapes: [torch.Size([1, 1, 256, 32, 128])], barrier: True, local dim: 4;  accu_time 0.0000s
+1 squeeze: input_from: [0], output_to: [2], output_shapes: [torch.Size([1, 256, 32, 128])], barrier: False, local dim: 3;  accu_time 0.0000s
+2 permute: input_from: [1], output_to: [3], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0000s
+3 conv2d: input_from: [2], output_to: [4], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0003s
+4 relu: input_from: [3], output_to: [5], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0003s
+5 conv2d: input_from: [4], output_to: [6], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0004s
+6 relu: input_from: [5], output_to: [7, 37], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0004s
+7 max_pool2d: input_from: [6], output_to: [8], output_shapes: [torch.Size([1, 32, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0004s
+8 conv2d: input_from: [7], output_to: [9], output_shapes: [torch.Size([1, 48, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0005s
+9 relu: input_from: [8], output_to: [10], output_shapes: [torch.Size([1, 48, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0005s
+10 conv2d: input_from: [9], output_to: [11], output_shapes: [torch.Size([1, 48, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0006s
+11 relu: input_from: [10], output_to: [12, 30], output_shapes: [torch.Size([1, 48, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0006s
+12 max_pool2d: input_from: [11], output_to: [13], output_shapes: [torch.Size([1, 48, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0006s
+13 conv2d: input_from: [12], output_to: [14], output_shapes: [torch.Size([1, 64, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0006s
+14 relu: input_from: [13], output_to: [15], output_shapes: [torch.Size([1, 64, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0007s
+15 conv2d: input_from: [14], output_to: [16], output_shapes: [torch.Size([1, 64, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0007s
+16 relu: input_from: [15], output_to: [17, 24], output_shapes: [torch.Size([1, 64, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0008s
+17 max_pool2d: input_from: [16], output_to: [18], output_shapes: [torch.Size([1, 64, 32, 16])], barrier: False, local dim: 3;  accu_time 0.0008s
+18 conv2d: input_from: [17], output_to: [19], output_shapes: [torch.Size([1, 80, 32, 16])], barrier: False, local dim: 3;  accu_time 0.0009s
+19 relu: input_from: [18], output_to: [20], output_shapes: [torch.Size([1, 80, 32, 16])], barrier: False, local dim: 3;  accu_time 0.0009s
+20 conv2d: input_from: [19], output_to: [21], output_shapes: [torch.Size([1, 80, 32, 16])], barrier: False, local dim: 3;  accu_time 0.0009s
+21 relu: input_from: [20], output_to: [22], output_shapes: [torch.Size([1, 80, 32, 16])], barrier: False, local dim: 3;  accu_time 0.0010s
+22 conv2d: input_from: [21], output_to: [23, 29, 36], output_shapes: [torch.Size([1, 4, 32, 16])], barrier: False, local dim: 3;  accu_time 0.0010s
+23 conv_transpose2d: input_from: [22], output_to: [24], output_shapes: [torch.Size([1, 4, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0011s
+24 cat: input_from: [23, 16], output_to: [25], output_shapes: [torch.Size([1, 68, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0011s
+25 conv2d: input_from: [24], output_to: [26], output_shapes: [torch.Size([1, 64, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0012s
+26 relu: input_from: [25], output_to: [27], output_shapes: [torch.Size([1, 64, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0012s
+27 conv2d: input_from: [26], output_to: [28, 35], output_shapes: [torch.Size([1, 8, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0013s
+28 conv_transpose2d: input_from: [27], output_to: [30], output_shapes: [torch.Size([1, 8, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0014s
+29 conv_transpose2d: input_from: [22], output_to: [30], output_shapes: [torch.Size([1, 4, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0014s
+30 cat: input_from: [28, 11, 29], output_to: [31], output_shapes: [torch.Size([1, 60, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0015s
+31 conv2d: input_from: [30], output_to: [32], output_shapes: [torch.Size([1, 48, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0016s
+32 relu: input_from: [31], output_to: [33], output_shapes: [torch.Size([1, 48, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0016s
+33 conv2d: input_from: [32], output_to: [34], output_shapes: [torch.Size([1, 16, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0016s
+34 conv_transpose2d: input_from: [33], output_to: [37], output_shapes: [torch.Size([1, 16, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0019s
+35 conv_transpose2d: input_from: [27], output_to: [37], output_shapes: [torch.Size([1, 8, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0019s
+36 conv_transpose2d: input_from: [22], output_to: [37], output_shapes: [torch.Size([1, 4, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0019s
+37 cat: input_from: [34, 6, 35, 36], output_to: [38], output_shapes: [torch.Size([1, 60, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0020s
+38 conv2d: input_from: [37], output_to: [39], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0021s
+39 relu: input_from: [38], output_to: [40], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0022s
+40 __getitem__: input_from: [39], output_to: [41], output_shapes: [torch.Size([1, 1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0022s
+41 conv3d: input_from: [40], output_to: [42], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0034s
+42 relu: input_from: [41], output_to: [43, 48, 54, 60], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0036s
+43 conv3d: input_from: [42], output_to: [44], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0069s
+44 batch_norm: input_from: [43], output_to: [45], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0077s
+45 relu: input_from: [44], output_to: [46], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0079s
+46 conv3d: input_from: [45], output_to: [47], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0112s
+47 batch_norm: input_from: [46], output_to: [53], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0120s
+48 conv3d: input_from: [42], output_to: [49], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0169s
+49 batch_norm: input_from: [48], output_to: [50], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0177s
+Task exception was never retrieved
+future: <Task finished name='Task-8' coro=<ParallelCollaborativeInference.start_server.<locals>._serve() done, defined at /home/user/project/ParallelCollaborativeInference/ParallelCollaborativeInference/src.py:157> exception=TypeError('expected Tensor as element 1 in argument 0, but got NoneType')>
+Traceback (most recent call last):
+  File "/home/user/project/ParallelCollaborativeInference/ParallelCollaborativeInference/src.py", line 179, in _serve
+    raise e
+  File "/home/user/project/ParallelCollaborativeInference/ParallelCollaborativeInference/src.py", line 173, in _serve
+    await self.start_common_loop(model.forward, None, None,
+  File "/home/user/project/ParallelCollaborativeInference/ParallelCollaborativeInference/src.py", line 442, in start_common_loop
+    await random_exec_compiled(profile_result, last_bandwidth)
+  File "/home/user/project/ParallelCollaborativeInference/ParallelCollaborativeInference/random_exec.py", line 210, in random_exec_compiled
+    await exec_func(*args)
+  File "/home/user/project/ParallelCollaborativeInference/ParallelCollaborativeInference/random_exec.py", line 102, in merged_plain_exec
+    intermediates: torch.Tensor = p.func(*args, **kwargs)
+TypeError: expected Tensor as element 1 in argument 0, but got NoneType
+50 relu: input_from: [49], output_to: [51], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0179s
+51 conv3d: input_from: [50], output_to: [52], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0228s
+52 batch_norm: input_from: [51], output_to: [53], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0236s
+53 add_: input_from: [47, 52], output_to: [59], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0239s
+54 conv3d: input_from: [42], output_to: [55], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0288s
+55 batch_norm: input_from: [54], output_to: [56], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0296s
+56 relu: input_from: [55], output_to: [57], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0298s
+57 conv3d: input_from: [56], output_to: [58], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0347s
+58 batch_norm: input_from: [57], output_to: [59], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0355s
+59 add_: input_from: [53, 58], output_to: [60], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0358s
+60 add: input_from: [59, 42], output_to: [61], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0362s
+61 relu: input_from: [60], output_to: [62], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0364s
+62 conv3d: input_from: [61], output_to: [63], output_shapes: [torch.Size([1, 20, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0407s
+63 permute: input_from: [62], output_to: [64], output_shapes: [torch.Size([1, 20, 256, 32, 128])], barrier: False, local dim: 4;  accu_time 0.0407s
+64 argmax: input_from: [63], output_to: [65], output_shapes: [torch.Size([1, 256, 32, 128])], barrier: False, local dim: 3;  accu_time 0.0410s
+65 type: input_from: [64], output_to: [66], output_shapes: [torch.Size([1, 256, 32, 128])], barrier: False, local dim: 3;  accu_time 0.0411s
+66 _end: input_from: [65], output_to: [-1], output_shapes: [torch.Size([1, 256, 32, 128])], barrier: True, local dim: None;  accu_time 0.0411s
+total 67 ops (filtered from 73 ops); time 0.0411s (aligned by 1.1810 sleep_step 20).
+
+Loaded precomputed mixed plan from mixed_plan_SCONet_0M_192.168.50.102.pkl.
+Number of local ops 65
+Number of global ops -66
+server for ('192.168.50.102', 49704): init forward complete.
+bw 0MB/s offload at [] recv at [] sleep for 0 ops est time 0.5609s.
+bw 1MB/s offload at [] recv at [] sleep for 0 ops est time 0.5609s.
+bw 2MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.5439s.
+bw 3MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.5439s.
+bw 4MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.4511s.
+bw 5MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.3683s.
+bw 6MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.3131s.
+bw 7MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.2737s.
+bw 8MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.2441s.
+bw 9MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.2211s.
+bw 10MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.2027s.
+bw 11MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1876s.
+bw 12MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1751s.
+bw 13MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1645s.
+bw 14MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1554s.
+bw 15MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1475s.
+bw 16MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1406s.
+bw 17MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1345s.
+bw 18MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1291s.
+bw 19MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1242s.
+bw 20MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1199s.
+bw 21MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1159s.
+bw 22MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1124s.
+bw 23MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1091s.
+bw 24MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1061s.
+bw 25MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1033s.
+bw 26MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.1008s.
+bw 27MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.0984s.
+bw 28MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.0962s.
+bw 29MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.0942s.
+bw 30MB/s offload at [65] recv at [23, 29, 36] sleep for 4 ops est time 0.0923s.
+Started send loop.
+Started recv loop.
+server for ('192.168.50.102', 49704): Init: send took 4.81e-03s (0.0407MB, 1 items), recv took 3.72e-01s (11.2789MB, (5 items)), dumps took 7.44e-04s, loads took 1.65e-02s total 0.3939s bandwidth 30.0521MB/s, first send at 1726580280.909194, last send at 1726580280.909194, first recv at 1726580202.0563676, last recv at 1726580280.8978221
+expected Tensor as element 1 in argument 0, but got NoneType
+Stopped server.

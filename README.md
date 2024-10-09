@@ -1,1 +1,1 @@
-# intraDP
+# ParallelCollaborativeInference

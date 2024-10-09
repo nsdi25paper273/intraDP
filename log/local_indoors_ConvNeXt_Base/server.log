@@ -1,0 +1,416 @@
+[W kineto_shim.cpp:372] Profiler is not initialized: skipping step() invocation
+STAGE:2024-09-20 00:35:56 3906709:3906709 ActivityProfilerController.cpp:312] Completed Stage: Warm Up
+STAGE:2024-09-20 00:35:56 3906709:3906709 ActivityProfilerController.cpp:318] Completed Stage: Collection
+STAGE:2024-09-20 00:35:56 3906709:3906709 ActivityProfilerController.cpp:322] Completed Stage: Post Processing
+Configuring torch to use deterministic behaviors.
+parallel approach select
+constraint_latency False
+starting ParallelCollaborativeInference server...
+Serving on ('0.0.0.0', 12345)
+Ctrl on ('0.0.0.0', 12346)
+server for ('192.168.50.102', 56022): client connected.
+server for ('192.168.50.102', 56022): model ConvNeXt_84M_192.168.50.102 initial complete.
+server for ('192.168.50.102', 56022): recv init input from client
+Input size 0.5746MB
+Forwarding for 1(+2 warmup and 3 repeat) times for initialization.
+Forward of the original model takes average 0.0124s.
+pickle.dumps size to time poly: 
+            2
+-1.069e-17 x + 3.327e-10 x + 7.47e-05
+pickle.loads size to time poly: 
+            2
+-1.517e-17 x + 3.73e-10 x + 4.5e-05
+Output size 0.0042MB
+Local random exec takes average 0.0118s.
+Using torch.profiler for op profile
+Operator records (align ops time with factor 1.0879): 
+0 _start: input_from: [], output_to: [1], output_shapes: [torch.Size([1, 3, 224, 224])], barrier: True, local dim: 3;  accu_time 0.0000s
+1 conv2d: input_from: [0], output_to: [2], output_shapes: [torch.Size([1, 128, 56, 56])], barrier: False, local dim: 3;  accu_time 0.0001s
+2 permute: input_from: [1], output_to: [3], output_shapes: [torch.Size([1, 56, 56, 128])], barrier: False, local dim: 2;  accu_time 0.0001s
+3 layer_norm: input_from: [2], output_to: [4], output_shapes: [torch.Size([1, 56, 56, 128])], barrier: False, local dim: 2;  accu_time 0.0002s
+4 permute: input_from: [3], output_to: [5, 13], output_shapes: [torch.Size([1, 128, 56, 56])], barrier: False, local dim: 3;  accu_time 0.0002s
+5 conv2d: input_from: [4], output_to: [6], output_shapes: [torch.Size([1, 128, 56, 56])], barrier: False, local dim: 3;  accu_time 0.0005s
+6 permute: input_from: [5], output_to: [7], output_shapes: [torch.Size([1, 56, 56, 128])], barrier: False, local dim: 2;  accu_time 0.0005s
+7 layer_norm: input_from: [6], output_to: [8], output_shapes: [torch.Size([1, 56, 56, 128])], barrier: False, local dim: 2;  accu_time 0.0006s
+8 linear: input_from: [7], output_to: [9], output_shapes: [torch.Size([1, 56, 56, 512])], barrier: False, local dim: 2;  accu_time 0.0007s
+9 gelu: input_from: [8], output_to: [10], output_shapes: [torch.Size([1, 56, 56, 512])], barrier: False, local dim: 2;  accu_time 0.0007s
+10 linear: input_from: [9], output_to: [11], output_shapes: [torch.Size([1, 56, 56, 128])], barrier: False, local dim: 2;  accu_time 0.0008s
+11 permute: input_from: [10], output_to: [12], output_shapes: [torch.Size([1, 128, 56, 56])], barrier: False, local dim: 3;  accu_time 0.0008s
+12 mul: input_from: [11], output_to: [13], output_shapes: [torch.Size([1, 128, 56, 56])], barrier: False, local dim: 3;  accu_time 0.0008s
+13 add_: input_from: [12, 4], output_to: [14, 22], output_shapes: [torch.Size([1, 128, 56, 56])], barrier: False, local dim: 3;  accu_time 0.0008s
+14 conv2d: input_from: [13], output_to: [15], output_shapes: [torch.Size([1, 128, 56, 56])], barrier: False, local dim: 3;  accu_time 0.0011s
+15 permute: input_from: [14], output_to: [16], output_shapes: [torch.Size([1, 56, 56, 128])], barrier: False, local dim: 2;  accu_time 0.0011s
+16 layer_norm: input_from: [15], output_to: [17], output_shapes: [torch.Size([1, 56, 56, 128])], barrier: False, local dim: 2;  accu_time 0.0012s
+17 linear: input_from: [16], output_to: [18], output_shapes: [torch.Size([1, 56, 56, 512])], barrier: False, local dim: 2;  accu_time 0.0013s
+18 gelu: input_from: [17], output_to: [19], output_shapes: [torch.Size([1, 56, 56, 512])], barrier: False, local dim: 2;  accu_time 0.0013s
+19 linear: input_from: [18], output_to: [20], output_shapes: [torch.Size([1, 56, 56, 128])], barrier: False, local dim: 2;  accu_time 0.0014s
+20 permute: input_from: [19], output_to: [21], output_shapes: [torch.Size([1, 128, 56, 56])], barrier: False, local dim: 3;  accu_time 0.0014s
+21 mul: input_from: [20], output_to: [22], output_shapes: [torch.Size([1, 128, 56, 56])], barrier: False, local dim: 3;  accu_time 0.0014s
+22 add_: input_from: [21, 13], output_to: [23, 31], output_shapes: [torch.Size([1, 128, 56, 56])], barrier: False, local dim: 3;  accu_time 0.0015s
+23 conv2d: input_from: [22], output_to: [24], output_shapes: [torch.Size([1, 128, 56, 56])], barrier: False, local dim: 3;  accu_time 0.0017s
+24 permute: input_from: [23], output_to: [25], output_shapes: [torch.Size([1, 56, 56, 128])], barrier: False, local dim: 2;  accu_time 0.0017s
+25 layer_norm: input_from: [24], output_to: [26], output_shapes: [torch.Size([1, 56, 56, 128])], barrier: False, local dim: 2;  accu_time 0.0018s
+26 linear: input_from: [25], output_to: [27], output_shapes: [torch.Size([1, 56, 56, 512])], barrier: False, local dim: 2;  accu_time 0.0019s
+27 gelu: input_from: [26], output_to: [28], output_shapes: [torch.Size([1, 56, 56, 512])], barrier: False, local dim: 2;  accu_time 0.0020s
+28 linear: input_from: [27], output_to: [29], output_shapes: [torch.Size([1, 56, 56, 128])], barrier: False, local dim: 2;  accu_time 0.0020s
+29 permute: input_from: [28], output_to: [30], output_shapes: [torch.Size([1, 128, 56, 56])], barrier: False, local dim: 3;  accu_time 0.0020s
+30 mul: input_from: [29], output_to: [31], output_shapes: [torch.Size([1, 128, 56, 56])], barrier: False, local dim: 3;  accu_time 0.0021s
+31 add_: input_from: [30, 22], output_to: [32], output_shapes: [torch.Size([1, 128, 56, 56])], barrier: False, local dim: 3;  accu_time 0.0021s
+32 permute: input_from: [31], output_to: [33], output_shapes: [torch.Size([1, 56, 56, 128])], barrier: False, local dim: 2;  accu_time 0.0021s
+33 layer_norm: input_from: [32], output_to: [34], output_shapes: [torch.Size([1, 56, 56, 128])], barrier: False, local dim: 2;  accu_time 0.0021s
+34 permute: input_from: [33], output_to: [35], output_shapes: [torch.Size([1, 128, 56, 56])], barrier: False, local dim: 3;  accu_time 0.0021s
+35 conv2d: input_from: [34], output_to: [36, 44], output_shapes: [torch.Size([1, 256, 28, 28])], barrier: False, local dim: 3;  accu_time 0.0022s
+36 conv2d: input_from: [35], output_to: [37], output_shapes: [torch.Size([1, 256, 28, 28])], barrier: False, local dim: 3;  accu_time 0.0023s
+37 permute: input_from: [36], output_to: [38], output_shapes: [torch.Size([1, 28, 28, 256])], barrier: False, local dim: 2;  accu_time 0.0023s
+38 layer_norm: input_from: [37], output_to: [39], output_shapes: [torch.Size([1, 28, 28, 256])], barrier: False, local dim: 2;  accu_time 0.0024s
+39 linear: input_from: [38], output_to: [40], output_shapes: [torch.Size([1, 28, 28, 1024])], barrier: False, local dim: 2;  accu_time 0.0024s
+40 gelu: input_from: [39], output_to: [41], output_shapes: [torch.Size([1, 28, 28, 1024])], barrier: False, local dim: 2;  accu_time 0.0024s
+41 linear: input_from: [40], output_to: [42], output_shapes: [torch.Size([1, 28, 28, 256])], barrier: False, local dim: 2;  accu_time 0.0026s
+42 permute: input_from: [41], output_to: [43], output_shapes: [torch.Size([1, 256, 28, 28])], barrier: False, local dim: 3;  accu_time 0.0026s
+43 mul: input_from: [42], output_to: [44], output_shapes: [torch.Size([1, 256, 28, 28])], barrier: False, local dim: 3;  accu_time 0.0026s
+44 add_: input_from: [43, 35], output_to: [45, 53], output_shapes: [torch.Size([1, 256, 28, 28])], barrier: False, local dim: 3;  accu_time 0.0026s
+45 conv2d: input_from: [44], output_to: [46], output_shapes: [torch.Size([1, 256, 28, 28])], barrier: False, local dim: 3;  accu_time 0.0027s
+46 permute: input_from: [45], output_to: [47], output_shapes: [torch.Size([1, 28, 28, 256])], barrier: False, local dim: 2;  accu_time 0.0027s
+47 layer_norm: input_from: [46], output_to: [48], output_shapes: [torch.Size([1, 28, 28, 256])], barrier: False, local dim: 2;  accu_time 0.0027s
+48 linear: input_from: [47], output_to: [49], output_shapes: [torch.Size([1, 28, 28, 1024])], barrier: False, local dim: 2;  accu_time 0.0028s
+49 gelu: input_from: [48], output_to: [50], output_shapes: [torch.Size([1, 28, 28, 1024])], barrier: False, local dim: 2;  accu_time 0.0028s
+50 linear: input_from: [49], output_to: [51], output_shapes: [torch.Size([1, 28, 28, 256])], barrier: False, local dim: 2;  accu_time 0.0029s
+51 permute: input_from: [50], output_to: [52], output_shapes: [torch.Size([1, 256, 28, 28])], barrier: False, local dim: 3;  accu_time 0.0029s
+52 mul: input_from: [51], output_to: [53], output_shapes: [torch.Size([1, 256, 28, 28])], barrier: False, local dim: 3;  accu_time 0.0029s
+53 add_: input_from: [52, 44], output_to: [54, 62], output_shapes: [torch.Size([1, 256, 28, 28])], barrier: False, local dim: 3;  accu_time 0.0029s
+54 conv2d: input_from: [53], output_to: [55], output_shapes: [torch.Size([1, 256, 28, 28])], barrier: False, local dim: 3;  accu_time 0.0030s
+55 permute: input_from: [54], output_to: [56], output_shapes: [torch.Size([1, 28, 28, 256])], barrier: False, local dim: 2;  accu_time 0.0030s
+56 layer_norm: input_from: [55], output_to: [57], output_shapes: [torch.Size([1, 28, 28, 256])], barrier: False, local dim: 2;  accu_time 0.0030s
+57 linear: input_from: [56], output_to: [58], output_shapes: [torch.Size([1, 28, 28, 1024])], barrier: False, local dim: 2;  accu_time 0.0031s
+58 gelu: input_from: [57], output_to: [59], output_shapes: [torch.Size([1, 28, 28, 1024])], barrier: False, local dim: 2;  accu_time 0.0031s
+59 linear: input_from: [58], output_to: [60], output_shapes: [torch.Size([1, 28, 28, 256])], barrier: False, local dim: 2;  accu_time 0.0032s
+60 permute: input_from: [59], output_to: [61], output_shapes: [torch.Size([1, 256, 28, 28])], barrier: False, local dim: 3;  accu_time 0.0032s
+61 mul: input_from: [60], output_to: [62], output_shapes: [torch.Size([1, 256, 28, 28])], barrier: False, local dim: 3;  accu_time 0.0032s
+62 add_: input_from: [61, 53], output_to: [63], output_shapes: [torch.Size([1, 256, 28, 28])], barrier: False, local dim: 3;  accu_time 0.0032s
+63 permute: input_from: [62], output_to: [64], output_shapes: [torch.Size([1, 28, 28, 256])], barrier: False, local dim: 2;  accu_time 0.0032s
+64 layer_norm: input_from: [63], output_to: [65], output_shapes: [torch.Size([1, 28, 28, 256])], barrier: False, local dim: 2;  accu_time 0.0033s
+65 permute: input_from: [64], output_to: [66], output_shapes: [torch.Size([1, 256, 28, 28])], barrier: False, local dim: 3;  accu_time 0.0033s
+66 conv2d: input_from: [65], output_to: [67, 75], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0033s
+67 conv2d: input_from: [66], output_to: [68], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0034s
+68 permute: input_from: [67], output_to: [69], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0034s
+69 layer_norm: input_from: [68], output_to: [70], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0034s
+70 linear: input_from: [69], output_to: [71], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0035s
+71 gelu: input_from: [70], output_to: [72], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0035s
+72 linear: input_from: [71], output_to: [73], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0036s
+73 permute: input_from: [72], output_to: [74], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0036s
+74 mul: input_from: [73], output_to: [75], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0036s
+75 add_: input_from: [74, 66], output_to: [76, 84], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0036s
+76 conv2d: input_from: [75], output_to: [77], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0037s
+77 permute: input_from: [76], output_to: [78], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0037s
+78 layer_norm: input_from: [77], output_to: [79], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0037s
+79 linear: input_from: [78], output_to: [80], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0038s
+80 gelu: input_from: [79], output_to: [81], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0038s
+81 linear: input_from: [80], output_to: [82], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0039s
+82 permute: input_from: [81], output_to: [83], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0039s
+83 mul: input_from: [82], output_to: [84], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0039s
+84 add_: input_from: [83, 75], output_to: [85, 93], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0039s
+85 conv2d: input_from: [84], output_to: [86], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0040s
+86 permute: input_from: [85], output_to: [87], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0040s
+87 layer_norm: input_from: [86], output_to: [88], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0040s
+88 linear: input_from: [87], output_to: [89], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0041s
+89 gelu: input_from: [88], output_to: [90], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0041s
+90 linear: input_from: [89], output_to: [91], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0042s
+91 permute: input_from: [90], output_to: [92], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0042s
+92 mul: input_from: [91], output_to: [93], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0042s
+93 add_: input_from: [92, 84], output_to: [94, 102], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0042s
+94 conv2d: input_from: [93], output_to: [95], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0042s
+95 permute: input_from: [94], output_to: [96], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0042s
+96 layer_norm: input_from: [95], output_to: [97], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0043s
+97 linear: input_from: [96], output_to: [98], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0044s
+98 gelu: input_from: [97], output_to: [99], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0044s
+99 linear: input_from: [98], output_to: [100], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0045s
+100 permute: input_from: [99], output_to: [101], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0045s
+101 mul: input_from: [100], output_to: [102], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0045s
+102 add_: input_from: [101, 93], output_to: [103, 111], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0045s
+103 conv2d: input_from: [102], output_to: [104], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0045s
+104 permute: input_from: [103], output_to: [105], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0045s
+105 layer_norm: input_from: [104], output_to: [106], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0046s
+106 linear: input_from: [105], output_to: [107], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0046s
+107 gelu: input_from: [106], output_to: [108], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0047s
+108 linear: input_from: [107], output_to: [109], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0048s
+109 permute: input_from: [108], output_to: [110], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0048s
+110 mul: input_from: [109], output_to: [111], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0048s
+111 add_: input_from: [110, 102], output_to: [112, 120], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0048s
+112 conv2d: input_from: [111], output_to: [113], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0048s
+113 permute: input_from: [112], output_to: [114], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0048s
+114 layer_norm: input_from: [113], output_to: [115], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0048s
+115 linear: input_from: [114], output_to: [116], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0049s
+116 gelu: input_from: [115], output_to: [117], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0049s
+117 linear: input_from: [116], output_to: [118], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0050s
+118 permute: input_from: [117], output_to: [119], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0050s
+119 mul: input_from: [118], output_to: [120], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0050s
+120 add_: input_from: [119, 111], output_to: [121, 129], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0050s
+121 conv2d: input_from: [120], output_to: [122], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0051s
+122 permute: input_from: [121], output_to: [123], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0051s
+123 layer_norm: input_from: [122], output_to: [124], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0051s
+124 linear: input_from: [123], output_to: [125], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0052s
+125 gelu: input_from: [124], output_to: [126], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0052s
+126 linear: input_from: [125], output_to: [127], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0053s
+127 permute: input_from: [126], output_to: [128], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0053s
+128 mul: input_from: [127], output_to: [129], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0053s
+129 add_: input_from: [128, 120], output_to: [130, 138], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0053s
+130 conv2d: input_from: [129], output_to: [131], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0054s
+131 permute: input_from: [130], output_to: [132], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0054s
+132 layer_norm: input_from: [131], output_to: [133], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0054s
+133 linear: input_from: [132], output_to: [134], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0055s
+134 gelu: input_from: [133], output_to: [135], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0055s
+135 linear: input_from: [134], output_to: [136], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0056s
+136 permute: input_from: [135], output_to: [137], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0056s
+137 mul: input_from: [136], output_to: [138], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0056s
+138 add_: input_from: [137, 129], output_to: [139, 147], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0056s
+139 conv2d: input_from: [138], output_to: [140], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0057s
+140 permute: input_from: [139], output_to: [141], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0057s
+141 layer_norm: input_from: [140], output_to: [142], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0057s
+142 linear: input_from: [141], output_to: [143], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0058s
+143 gelu: input_from: [142], output_to: [144], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0058s
+144 linear: input_from: [143], output_to: [145], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0059s
+145 permute: input_from: [144], output_to: [146], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0059s
+146 mul: input_from: [145], output_to: [147], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0059s
+147 add_: input_from: [146, 138], output_to: [148, 156], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0059s
+148 conv2d: input_from: [147], output_to: [149], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0060s
+149 permute: input_from: [148], output_to: [150], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0060s
+150 layer_norm: input_from: [149], output_to: [151], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0060s
+151 linear: input_from: [150], output_to: [152], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0061s
+152 gelu: input_from: [151], output_to: [153], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0061s
+153 linear: input_from: [152], output_to: [154], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0062s
+154 permute: input_from: [153], output_to: [155], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0062s
+155 mul: input_from: [154], output_to: [156], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0062s
+156 add_: input_from: [155, 147], output_to: [157, 165], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0062s
+157 conv2d: input_from: [156], output_to: [158], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0062s
+158 permute: input_from: [157], output_to: [159], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0062s
+159 layer_norm: input_from: [158], output_to: [160], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0063s
+160 linear: input_from: [159], output_to: [161], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0064s
+161 gelu: input_from: [160], output_to: [162], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0064s
+162 linear: input_from: [161], output_to: [163], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0065s
+163 permute: input_from: [162], output_to: [164], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0065s
+164 mul: input_from: [163], output_to: [165], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0065s
+165 add_: input_from: [164, 156], output_to: [166, 174], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0065s
+166 conv2d: input_from: [165], output_to: [167], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0065s
+167 permute: input_from: [166], output_to: [168], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0065s
+168 layer_norm: input_from: [167], output_to: [169], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0065s
+169 linear: input_from: [168], output_to: [170], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0066s
+170 gelu: input_from: [169], output_to: [171], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0066s
+171 linear: input_from: [170], output_to: [172], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0067s
+172 permute: input_from: [171], output_to: [173], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0067s
+173 mul: input_from: [172], output_to: [174], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0067s
+174 add_: input_from: [173, 165], output_to: [175, 183], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0068s
+175 conv2d: input_from: [174], output_to: [176], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0068s
+176 permute: input_from: [175], output_to: [177], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0068s
+177 layer_norm: input_from: [176], output_to: [178], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0068s
+178 linear: input_from: [177], output_to: [179], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0069s
+179 gelu: input_from: [178], output_to: [180], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0069s
+180 linear: input_from: [179], output_to: [181], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0070s
+181 permute: input_from: [180], output_to: [182], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0070s
+182 mul: input_from: [181], output_to: [183], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0070s
+183 add_: input_from: [182, 174], output_to: [184, 192], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0070s
+184 conv2d: input_from: [183], output_to: [185], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0071s
+185 permute: input_from: [184], output_to: [186], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0071s
+186 layer_norm: input_from: [185], output_to: [187], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0071s
+187 linear: input_from: [186], output_to: [188], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0072s
+188 gelu: input_from: [187], output_to: [189], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0072s
+189 linear: input_from: [188], output_to: [190], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0073s
+190 permute: input_from: [189], output_to: [191], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0073s
+191 mul: input_from: [190], output_to: [192], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0073s
+192 add_: input_from: [191, 183], output_to: [193, 201], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0073s
+193 conv2d: input_from: [192], output_to: [194], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0074s
+194 permute: input_from: [193], output_to: [195], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0074s
+195 layer_norm: input_from: [194], output_to: [196], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0074s
+196 linear: input_from: [195], output_to: [197], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0075s
+197 gelu: input_from: [196], output_to: [198], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0075s
+198 linear: input_from: [197], output_to: [199], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0076s
+199 permute: input_from: [198], output_to: [200], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0076s
+200 mul: input_from: [199], output_to: [201], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0076s
+201 add_: input_from: [200, 192], output_to: [202, 210], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0076s
+202 conv2d: input_from: [201], output_to: [203], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0077s
+203 permute: input_from: [202], output_to: [204], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0077s
+204 layer_norm: input_from: [203], output_to: [205], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0077s
+205 linear: input_from: [204], output_to: [206], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0078s
+206 gelu: input_from: [205], output_to: [207], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0078s
+207 linear: input_from: [206], output_to: [208], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0079s
+208 permute: input_from: [207], output_to: [209], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0079s
+209 mul: input_from: [208], output_to: [210], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0079s
+210 add_: input_from: [209, 201], output_to: [211, 219], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0079s
+211 conv2d: input_from: [210], output_to: [212], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0079s
+212 permute: input_from: [211], output_to: [213], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0079s
+213 layer_norm: input_from: [212], output_to: [214], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0080s
+214 linear: input_from: [213], output_to: [215], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0081s
+215 gelu: input_from: [214], output_to: [216], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0081s
+216 linear: input_from: [215], output_to: [217], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0082s
+217 permute: input_from: [216], output_to: [218], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0082s
+218 mul: input_from: [217], output_to: [219], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0082s
+219 add_: input_from: [218, 210], output_to: [220, 228], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0082s
+220 conv2d: input_from: [219], output_to: [221], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0082s
+221 permute: input_from: [220], output_to: [222], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0082s
+222 layer_norm: input_from: [221], output_to: [223], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0082s
+223 linear: input_from: [222], output_to: [224], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0083s
+224 gelu: input_from: [223], output_to: [225], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0084s
+225 linear: input_from: [224], output_to: [226], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0084s
+226 permute: input_from: [225], output_to: [227], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0084s
+227 mul: input_from: [226], output_to: [228], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0085s
+228 add_: input_from: [227, 219], output_to: [229, 237], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0085s
+229 conv2d: input_from: [228], output_to: [230], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0085s
+230 permute: input_from: [229], output_to: [231], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0085s
+231 layer_norm: input_from: [230], output_to: [232], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0085s
+232 linear: input_from: [231], output_to: [233], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0086s
+233 gelu: input_from: [232], output_to: [234], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0086s
+234 linear: input_from: [233], output_to: [235], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0087s
+235 permute: input_from: [234], output_to: [236], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0087s
+236 mul: input_from: [235], output_to: [237], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0087s
+237 add_: input_from: [236, 228], output_to: [238, 246], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0087s
+238 conv2d: input_from: [237], output_to: [239], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0088s
+239 permute: input_from: [238], output_to: [240], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0088s
+240 layer_norm: input_from: [239], output_to: [241], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0088s
+241 linear: input_from: [240], output_to: [242], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0089s
+242 gelu: input_from: [241], output_to: [243], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0089s
+243 linear: input_from: [242], output_to: [244], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0090s
+244 permute: input_from: [243], output_to: [245], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0090s
+245 mul: input_from: [244], output_to: [246], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0090s
+246 add_: input_from: [245, 237], output_to: [247, 255], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0090s
+247 conv2d: input_from: [246], output_to: [248], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0091s
+248 permute: input_from: [247], output_to: [249], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0091s
+249 layer_norm: input_from: [248], output_to: [250], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0091s
+250 linear: input_from: [249], output_to: [251], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0092s
+251 gelu: input_from: [250], output_to: [252], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0092s
+252 linear: input_from: [251], output_to: [253], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0093s
+253 permute: input_from: [252], output_to: [254], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0093s
+254 mul: input_from: [253], output_to: [255], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0093s
+255 add_: input_from: [254, 246], output_to: [256, 264], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0093s
+256 conv2d: input_from: [255], output_to: [257], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0094s
+257 permute: input_from: [256], output_to: [258], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0094s
+258 layer_norm: input_from: [257], output_to: [259], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0094s
+259 linear: input_from: [258], output_to: [260], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0095s
+260 gelu: input_from: [259], output_to: [261], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0095s
+261 linear: input_from: [260], output_to: [262], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0096s
+262 permute: input_from: [261], output_to: [263], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0096s
+263 mul: input_from: [262], output_to: [264], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0096s
+264 add_: input_from: [263, 255], output_to: [265, 273], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0096s
+265 conv2d: input_from: [264], output_to: [266], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0097s
+266 permute: input_from: [265], output_to: [267], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0097s
+267 layer_norm: input_from: [266], output_to: [268], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0097s
+268 linear: input_from: [267], output_to: [269], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0098s
+269 gelu: input_from: [268], output_to: [270], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0098s
+270 linear: input_from: [269], output_to: [271], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0099s
+271 permute: input_from: [270], output_to: [272], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0099s
+272 mul: input_from: [271], output_to: [273], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0099s
+273 add_: input_from: [272, 264], output_to: [274, 282], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0099s
+274 conv2d: input_from: [273], output_to: [275], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0099s
+275 permute: input_from: [274], output_to: [276], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0099s
+276 layer_norm: input_from: [275], output_to: [277], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0100s
+277 linear: input_from: [276], output_to: [278], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0101s
+278 gelu: input_from: [277], output_to: [279], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0101s
+279 linear: input_from: [278], output_to: [280], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0102s
+280 permute: input_from: [279], output_to: [281], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0102s
+281 mul: input_from: [280], output_to: [282], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0102s
+282 add_: input_from: [281, 273], output_to: [283, 291], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0102s
+283 conv2d: input_from: [282], output_to: [284], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0102s
+284 permute: input_from: [283], output_to: [285], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0102s
+285 layer_norm: input_from: [284], output_to: [286], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0102s
+286 linear: input_from: [285], output_to: [287], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0103s
+287 gelu: input_from: [286], output_to: [288], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0103s
+288 linear: input_from: [287], output_to: [289], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0104s
+289 permute: input_from: [288], output_to: [290], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0104s
+290 mul: input_from: [289], output_to: [291], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0104s
+291 add_: input_from: [290, 282], output_to: [292, 300], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0105s
+292 conv2d: input_from: [291], output_to: [293], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0105s
+293 permute: input_from: [292], output_to: [294], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0105s
+294 layer_norm: input_from: [293], output_to: [295], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0105s
+295 linear: input_from: [294], output_to: [296], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0106s
+296 gelu: input_from: [295], output_to: [297], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0106s
+297 linear: input_from: [296], output_to: [298], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0107s
+298 permute: input_from: [297], output_to: [299], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0107s
+299 mul: input_from: [298], output_to: [300], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0107s
+300 add_: input_from: [299, 291], output_to: [301, 309], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0107s
+301 conv2d: input_from: [300], output_to: [302], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0108s
+302 permute: input_from: [301], output_to: [303], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0108s
+303 layer_norm: input_from: [302], output_to: [304], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0108s
+304 linear: input_from: [303], output_to: [305], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0109s
+305 gelu: input_from: [304], output_to: [306], output_shapes: [torch.Size([1, 14, 14, 2048])], barrier: False, local dim: 2;  accu_time 0.0109s
+306 linear: input_from: [305], output_to: [307], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0110s
+307 permute: input_from: [306], output_to: [308], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0110s
+308 mul: input_from: [307], output_to: [309], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0110s
+309 add_: input_from: [308, 300], output_to: [310], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0110s
+310 permute: input_from: [309], output_to: [311], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0110s
+311 layer_norm: input_from: [310], output_to: [312], output_shapes: [torch.Size([1, 14, 14, 512])], barrier: False, local dim: 2;  accu_time 0.0110s
+312 permute: input_from: [311], output_to: [313], output_shapes: [torch.Size([1, 512, 14, 14])], barrier: False, local dim: 3;  accu_time 0.0110s
+313 conv2d: input_from: [312], output_to: [314, 322], output_shapes: [torch.Size([1, 1024, 7, 7])], barrier: False, local dim: 3;  accu_time 0.0111s
+314 conv2d: input_from: [313], output_to: [315], output_shapes: [torch.Size([1, 1024, 7, 7])], barrier: False, local dim: 3;  accu_time 0.0111s
+315 permute: input_from: [314], output_to: [316], output_shapes: [torch.Size([1, 7, 7, 1024])], barrier: False, local dim: 2;  accu_time 0.0111s
+316 layer_norm: input_from: [315], output_to: [317], output_shapes: [torch.Size([1, 7, 7, 1024])], barrier: False, local dim: 2;  accu_time 0.0112s
+317 linear: input_from: [316], output_to: [318], output_shapes: [torch.Size([1, 7, 7, 4096])], barrier: False, local dim: 2;  accu_time 0.0113s
+318 gelu: input_from: [317], output_to: [319], output_shapes: [torch.Size([1, 7, 7, 4096])], barrier: False, local dim: 2;  accu_time 0.0113s
+319 linear: input_from: [318], output_to: [320], output_shapes: [torch.Size([1, 7, 7, 1024])], barrier: False, local dim: 2;  accu_time 0.0115s
+320 permute: input_from: [319], output_to: [321], output_shapes: [torch.Size([1, 1024, 7, 7])], barrier: False, local dim: 3;  accu_time 0.0115s
+321 mul: input_from: [320], output_to: [322], output_shapes: [torch.Size([1, 1024, 7, 7])], barrier: False, local dim: 3;  accu_time 0.0115s
+322 add_: input_from: [321, 313], output_to: [323, 331], output_shapes: [torch.Size([1, 1024, 7, 7])], barrier: False, local dim: 3;  accu_time 0.0115s
+323 conv2d: input_from: [322], output_to: [324], output_shapes: [torch.Size([1, 1024, 7, 7])], barrier: False, local dim: 3;  accu_time 0.0116s
+324 permute: input_from: [323], output_to: [325], output_shapes: [torch.Size([1, 7, 7, 1024])], barrier: False, local dim: 2;  accu_time 0.0116s
+325 layer_norm: input_from: [324], output_to: [326], output_shapes: [torch.Size([1, 7, 7, 1024])], barrier: False, local dim: 2;  accu_time 0.0116s
+326 linear: input_from: [325], output_to: [327], output_shapes: [torch.Size([1, 7, 7, 4096])], barrier: False, local dim: 2;  accu_time 0.0118s
+327 gelu: input_from: [326], output_to: [328], output_shapes: [torch.Size([1, 7, 7, 4096])], barrier: False, local dim: 2;  accu_time 0.0118s
+328 linear: input_from: [327], output_to: [329], output_shapes: [torch.Size([1, 7, 7, 1024])], barrier: False, local dim: 2;  accu_time 0.0119s
+329 permute: input_from: [328], output_to: [330], output_shapes: [torch.Size([1, 1024, 7, 7])], barrier: False, local dim: 3;  accu_time 0.0119s
+330 mul: input_from: [329], output_to: [331], output_shapes: [torch.Size([1, 1024, 7, 7])], barrier: False, local dim: 3;  accu_time 0.0120s
+331 add_: input_from: [330, 322], output_to: [332, 340], output_shapes: [torch.Size([1, 1024, 7, 7])], barrier: False, local dim: 3;  accu_time 0.0120s
+332 conv2d: input_from: [331], output_to: [333], output_shapes: [torch.Size([1, 1024, 7, 7])], barrier: False, local dim: 3;  accu_time 0.0120s
+333 permute: input_from: [332], output_to: [334], output_shapes: [torch.Size([1, 7, 7, 1024])], barrier: False, local dim: 2;  accu_time 0.0120s
+334 layer_norm: input_from: [333], output_to: [335], output_shapes: [torch.Size([1, 7, 7, 1024])], barrier: False, local dim: 2;  accu_time 0.0120s
+335 linear: input_from: [334], output_to: [336], output_shapes: [torch.Size([1, 7, 7, 4096])], barrier: False, local dim: 2;  accu_time 0.0122s
+336 gelu: input_from: [335], output_to: [337], output_shapes: [torch.Size([1, 7, 7, 4096])], barrier: False, local dim: 2;  accu_time 0.0122s
+337 linear: input_from: [336], output_to: [338], output_shapes: [torch.Size([1, 7, 7, 1024])], barrier: False, local dim: 2;  accu_time 0.0124s
+338 permute: input_from: [337], output_to: [339], output_shapes: [torch.Size([1, 1024, 7, 7])], barrier: False, local dim: 3;  accu_time 0.0124s
+339 mul: input_from: [338], output_to: [340], output_shapes: [torch.Size([1, 1024, 7, 7])], barrier: False, local dim: 3;  accu_time 0.0124s
+340 add_: input_from: [339, 331], output_to: [341], output_shapes: [torch.Size([1, 1024, 7, 7])], barrier: False, local dim: 3;  accu_time 0.0124s
+341 adaptive_avg_pool2d: input_from: [340], output_to: [342], output_shapes: [torch.Size([1, 1024, 1, 1])], barrier: True, local dim: None;  accu_time 0.0124s
+342 permute: input_from: [341], output_to: [343], output_shapes: [torch.Size([1, 1, 1, 1024])], barrier: True, local dim: None;  accu_time 0.0124s
+343 layer_norm: input_from: [342], output_to: [344], output_shapes: [torch.Size([1, 1, 1, 1024])], barrier: True, local dim: None;  accu_time 0.0124s
+344 permute: input_from: [343], output_to: [345], output_shapes: [torch.Size([1, 1024, 1, 1])], barrier: True, local dim: None;  accu_time 0.0124s
+345 flatten: input_from: [344], output_to: [346], output_shapes: [torch.Size([1, 1024])], barrier: True, local dim: None;  accu_time 0.0124s
+346 linear: input_from: [345], output_to: [347], output_shapes: [torch.Size([1, 1000])], barrier: True, local dim: None;  accu_time 0.0124s
+347 _end: input_from: [346], output_to: [-1], output_shapes: [torch.Size([1, 1000])], barrier: True, local dim: None;  accu_time 0.0124s
+total 348 ops (filtered from 348 ops); time 0.0124s (aligned by 1.0879 sleep_step 100).
+
+Computing plan for client.
+Number of local ops 340
+Number of global ops -341
+server for ('192.168.50.102', 56022): init forward complete.
+bw 0MB/s offload at [] recv at [] sleep for 0 ops est time 0.1559s.
+bw 1MB/s offload at [] recv at [] sleep for 0 ops est time 0.1559s.
+bw 2MB/s offload at [] recv at [] sleep for 0 ops est time 0.1559s.
+bw 3MB/s offload at [] recv at [] sleep for 0 ops est time 0.1559s.
+bw 4MB/s offload at [346] recv at [66] sleep for 3 ops est time 0.1436s.
+bw 5MB/s offload at [346] recv at [66] sleep for 3 ops est time 0.1242s.
+bw 6MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.1111s.
+bw 7MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0973s.
+bw 8MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0870s.
+bw 9MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0790s.
+bw 10MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0725s.
+bw 11MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0673s.
+bw 12MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0629s.
+bw 13MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0592s.
+bw 14MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0560s.
+bw 15MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0533s.
+bw 16MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0509s.
+bw 17MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0487s.
+bw 18MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0469s.
+bw 19MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0452s.
+bw 20MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0436s.
+bw 21MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0423s.
+bw 22MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0410s.
+bw 23MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0399s.
+bw 24MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0388s.
+bw 25MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0379s.
+bw 26MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0370s.
+bw 27MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0361s.
+bw 28MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0354s.
+bw 29MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0347s.
+bw 30MB/s offload at [346] recv at [0] sleep for 4 ops est time 0.0340s.
+Started send loop.
+Started recv loop.
+server for ('192.168.50.102', 56022): terminating server...
+server for ('192.168.50.102', 56022): terminated.
+Stopped server.

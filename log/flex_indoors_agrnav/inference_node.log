@@ -1,0 +1,163 @@
+[rospy.client][INFO] 2024-09-18 05:01:42,116: init_node, name[/inference_node], pid[112]
+[xmlrpc][INFO] 2024-09-18 05:01:42,118: XML-RPC server binding to 0.0.0.0:0
+[xmlrpc][INFO] 2024-09-18 05:01:42,119: Started XML-RPC server [http://robot2:42843/]
+[rospy.init][INFO] 2024-09-18 05:01:42,120: ROS Slave URI: [http://robot2:42843/]
+[rospy.impl.masterslave][INFO] 2024-09-18 05:01:42,120: _ready: http://robot2:42843/
+[rospy.registration][INFO] 2024-09-18 05:01:42,123: Registering with master node http://robot2:11311
+[xmlrpc][INFO] 2024-09-18 05:01:42,123: xml rpc node: starting XML-RPC server
+[rospy.init][INFO] 2024-09-18 05:01:42,221: registered with master
+[rospy.rosout][INFO] 2024-09-18 05:01:42,222: initializing /rosout core topic
+[rospy.rosout][INFO] 2024-09-18 05:01:42,237: connected to core topic /rosout
+[rospy.simtime][INFO] 2024-09-18 05:01:42,240: /use_sim_time is not set, will not subscribe to simulated time [/clock] topic
+[rospy.internal][INFO] 2024-09-18 05:01:54,597: topic[/rosout] adding connection to [/rosout], count 0
+[root][INFO] 2024-09-18 05:01:55,548: ============ Test weights: "/project/ParallelCollaborativeInference/third_parties/AGRNav/src/perception/SCONet/network/weights/weights_epoch_037.pth" ============
+
+[root][INFO] 2024-09-18 05:01:55,941: => Loading network architecture...
+[root][INFO] 2024-09-18 05:01:56,019: => Loading network weights...
+[root][INFO] 2024-09-18 05:01:56,202: => Model loaded at /project/ParallelCollaborativeInference/third_parties/AGRNav/src/perception/SCONet/network/weights/weights_epoch_037.pth
+[rosout][INFO] 2024-09-18 05:01:56,216: offload_mode flex
+[rosout][INFO] 2024-09-18 05:01:56,223: Configuring torch to use deterministic behaviors.
+[rosout][INFO] 2024-09-18 05:01:56,231: parallel approach flex
+[rosout][INFO] 2024-09-18 05:01:56,236: constraint_latency False
+[rosout][INFO] 2024-09-18 05:01:56,241: Warning: model still requires grad. Setting requires grad to False.
+[rosout][INFO] 2024-09-18 05:01:56,249: Connecting to server 192.168.50.11:12345
+[rosout][INFO] 2024-09-18 05:01:56,262: Connected to server 192.168.50.11: 12345
+[rosout][INFO] 2024-09-18 05:01:56,268: Model parameter number 0.8395M.
+[rosout][INFO] 2024-09-18 05:01:57,372: Send model to server 3.2606MB.
+[root][INFO] 2024-09-18 05:01:57,479: => Passing the network on the test set...
+[rosout][INFO] 2024-09-18 05:01:57,478: client: started.
+[rosout][INFO] 2024-09-18 05:01:58,474: client: send init input to server
+[rosout][INFO] 2024-09-18 05:01:58,503: Input size 8.0004MB
+[rosout][INFO] 2024-09-18 05:01:58,510: Forwarding for 0(+2 warmup and 3 repeat) times for initialization.
+[rosout][INFO] 2024-09-18 05:02:38,940: Forward of the original model takes average 0.5340s.
+[rosout][INFO] 2024-09-18 05:03:02,740: pickle.dumps size to time poly: 
+           2
+3.066e-18 x + 1.382e-08 x - 0.007907
+[rosout][INFO] 2024-09-18 05:03:02,748: pickle.loads size to time poly: 
+            2
+-2.821e-18 x + 9.962e-09 x - 0.01504
+[rosout][INFO] 2024-09-18 05:03:03,000: Output size 1.0004MB
+[rosout][INFO] 2024-09-18 05:03:05,735: Local random exec takes average 0.5450s.
+[rosout][INFO] 2024-09-18 05:03:05,743: Using torch.profiler for op profile
+[rosout][INFO] 2024-09-18 05:03:15,517: Operator records (align ops time with factor 0.9610): 
+[rosout][INFO] 2024-09-18 05:03:15,524: 0 _start: input_from: [], output_to: [1], output_shapes: [torch.Size([1, 1, 256, 32, 128])], barrier: True, local dim: 4;  accu_time 0.0000s
+[rosout][INFO] 2024-09-18 05:03:15,529: 1 squeeze: input_from: [0], output_to: [2], output_shapes: [torch.Size([1, 256, 32, 128])], barrier: False, local dim: 3;  accu_time 0.0002s
+[rosout][INFO] 2024-09-18 05:03:15,534: 2 permute: input_from: [1], output_to: [3], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0003s
+[rosout][INFO] 2024-09-18 05:03:15,539: 3 conv2d: input_from: [2], output_to: [4], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0477s
+[rosout][INFO] 2024-09-18 05:03:15,545: 4 relu: input_from: [3], output_to: [5], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0479s
+[rosout][INFO] 2024-09-18 05:03:15,551: 5 conv2d: input_from: [4], output_to: [6], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0492s
+[rosout][INFO] 2024-09-18 05:03:15,557: 6 relu: input_from: [5], output_to: [7, 37], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0494s
+[rosout][INFO] 2024-09-18 05:03:15,562: 7 max_pool2d: input_from: [6], output_to: [8], output_shapes: [torch.Size([1, 32, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0496s
+[rosout][INFO] 2024-09-18 05:03:15,567: 8 conv2d: input_from: [7], output_to: [9], output_shapes: [torch.Size([1, 48, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0502s
+[rosout][INFO] 2024-09-18 05:03:15,572: 9 relu: input_from: [8], output_to: [10], output_shapes: [torch.Size([1, 48, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0503s
+[rosout][INFO] 2024-09-18 05:03:15,577: 10 conv2d: input_from: [9], output_to: [11], output_shapes: [torch.Size([1, 48, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0511s
+[rosout][INFO] 2024-09-18 05:03:15,582: 11 relu: input_from: [10], output_to: [12, 30], output_shapes: [torch.Size([1, 48, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0512s
+[rosout][INFO] 2024-09-18 05:03:15,587: 12 max_pool2d: input_from: [11], output_to: [13], output_shapes: [torch.Size([1, 48, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0513s
+[rosout][INFO] 2024-09-18 05:03:15,592: 13 conv2d: input_from: [12], output_to: [14], output_shapes: [torch.Size([1, 64, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0516s
+[rosout][INFO] 2024-09-18 05:03:15,596: 14 relu: input_from: [13], output_to: [15], output_shapes: [torch.Size([1, 64, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0516s
+[rosout][INFO] 2024-09-18 05:03:15,601: 15 conv2d: input_from: [14], output_to: [16], output_shapes: [torch.Size([1, 64, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0520s
+[rosout][INFO] 2024-09-18 05:03:15,606: 16 relu: input_from: [15], output_to: [17, 24], output_shapes: [torch.Size([1, 64, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0521s
+[rosout][INFO] 2024-09-18 05:03:15,611: 17 max_pool2d: input_from: [16], output_to: [18], output_shapes: [torch.Size([1, 64, 32, 16])], barrier: False, local dim: 3;  accu_time 0.0522s
+[rosout][INFO] 2024-09-18 05:03:15,615: 18 conv2d: input_from: [17], output_to: [19], output_shapes: [torch.Size([1, 80, 32, 16])], barrier: False, local dim: 3;  accu_time 0.0526s
+[rosout][INFO] 2024-09-18 05:03:15,620: 19 relu: input_from: [18], output_to: [20], output_shapes: [torch.Size([1, 80, 32, 16])], barrier: False, local dim: 3;  accu_time 0.0527s
+[rosout][INFO] 2024-09-18 05:03:15,624: 20 conv2d: input_from: [19], output_to: [21], output_shapes: [torch.Size([1, 80, 32, 16])], barrier: False, local dim: 3;  accu_time 0.0533s
+[rosout][INFO] 2024-09-18 05:03:15,629: 21 relu: input_from: [20], output_to: [22], output_shapes: [torch.Size([1, 80, 32, 16])], barrier: False, local dim: 3;  accu_time 0.0534s
+[rosout][INFO] 2024-09-18 05:03:15,634: 22 conv2d: input_from: [21], output_to: [23, 29, 36], output_shapes: [torch.Size([1, 4, 32, 16])], barrier: False, local dim: 3;  accu_time 0.0542s
+[rosout][INFO] 2024-09-18 05:03:15,639: 23 conv_transpose2d: input_from: [22], output_to: [24], output_shapes: [torch.Size([1, 4, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0548s
+[rosout][INFO] 2024-09-18 05:03:15,644: 24 cat: input_from: [23, 16], output_to: [25], output_shapes: [torch.Size([1, 68, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0550s
+[rosout][INFO] 2024-09-18 05:03:15,649: 25 conv2d: input_from: [24], output_to: [26], output_shapes: [torch.Size([1, 64, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0558s
+[rosout][INFO] 2024-09-18 05:03:15,655: 26 relu: input_from: [25], output_to: [27], output_shapes: [torch.Size([1, 64, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0558s
+[rosout][INFO] 2024-09-18 05:03:15,660: 27 conv2d: input_from: [26], output_to: [28, 35], output_shapes: [torch.Size([1, 8, 64, 32])], barrier: False, local dim: 3;  accu_time 0.0568s
+[rosout][INFO] 2024-09-18 05:03:15,665: 28 conv_transpose2d: input_from: [27], output_to: [30], output_shapes: [torch.Size([1, 8, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0572s
+[rosout][INFO] 2024-09-18 05:03:15,670: 29 conv_transpose2d: input_from: [22], output_to: [30], output_shapes: [torch.Size([1, 4, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0574s
+[rosout][INFO] 2024-09-18 05:03:15,675: 30 cat: input_from: [28, 11, 29], output_to: [31], output_shapes: [torch.Size([1, 60, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0576s
+[rosout][INFO] 2024-09-18 05:03:15,679: 31 conv2d: input_from: [30], output_to: [32], output_shapes: [torch.Size([1, 48, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0590s
+[rosout][INFO] 2024-09-18 05:03:15,684: 32 relu: input_from: [31], output_to: [33], output_shapes: [torch.Size([1, 48, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0591s
+[rosout][INFO] 2024-09-18 05:03:15,689: 33 conv2d: input_from: [32], output_to: [34], output_shapes: [torch.Size([1, 16, 128, 64])], barrier: False, local dim: 3;  accu_time 0.0595s
+[rosout][INFO] 2024-09-18 05:03:15,694: 34 conv_transpose2d: input_from: [33], output_to: [37], output_shapes: [torch.Size([1, 16, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0628s
+[rosout][INFO] 2024-09-18 05:03:15,699: 35 conv_transpose2d: input_from: [27], output_to: [37], output_shapes: [torch.Size([1, 8, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0632s
+[rosout][INFO] 2024-09-18 05:03:15,704: 36 conv_transpose2d: input_from: [22], output_to: [37], output_shapes: [torch.Size([1, 4, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0634s
+[rosout][INFO] 2024-09-18 05:03:15,709: 37 cat: input_from: [34, 6, 35, 36], output_to: [38], output_shapes: [torch.Size([1, 60, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0638s
+[rosout][INFO] 2024-09-18 05:03:15,714: 38 conv2d: input_from: [37], output_to: [39], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0659s
+[rosout][INFO] 2024-09-18 05:03:15,718: 39 relu: input_from: [38], output_to: [40], output_shapes: [torch.Size([1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0661s
+[rosout][INFO] 2024-09-18 05:03:15,723: 40 __getitem__: input_from: [39], output_to: [41], output_shapes: [torch.Size([1, 1, 32, 256, 128])], barrier: False, local dim: 3;  accu_time 0.0661s
+[rosout][INFO] 2024-09-18 05:03:15,729: 41 conv3d: input_from: [40], output_to: [42], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0814s
+[rosout][INFO] 2024-09-18 05:03:15,734: 42 relu: input_from: [41], output_to: [43, 48, 54, 60], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.0828s
+[rosout][INFO] 2024-09-18 05:03:15,739: 43 conv3d: input_from: [42], output_to: [44], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.1323s
+[rosout][INFO] 2024-09-18 05:03:15,745: 44 batch_norm: input_from: [43], output_to: [45], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.1347s
+[rosout][INFO] 2024-09-18 05:03:15,750: 45 relu: input_from: [44], output_to: [46], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.1361s
+[rosout][INFO] 2024-09-18 05:03:15,754: 46 conv3d: input_from: [45], output_to: [47], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.1855s
+[rosout][INFO] 2024-09-18 05:03:15,760: 47 batch_norm: input_from: [46], output_to: [53], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.1879s
+[rosout][INFO] 2024-09-18 05:03:15,765: 48 conv3d: input_from: [42], output_to: [49], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.2616s
+[rosout][INFO] 2024-09-18 05:03:15,770: 49 batch_norm: input_from: [48], output_to: [50], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.2640s
+[rosout][INFO] 2024-09-18 05:03:15,775: 50 relu: input_from: [49], output_to: [51], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.2655s
+[rosout][INFO] 2024-09-18 05:03:15,780: 51 conv3d: input_from: [50], output_to: [52], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.3391s
+[rosout][INFO] 2024-09-18 05:03:15,784: 52 batch_norm: input_from: [51], output_to: [53], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.3416s
+[rosout][INFO] 2024-09-18 05:03:15,789: 53 add_: input_from: [47, 52], output_to: [59], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.3437s
+[rosout][INFO] 2024-09-18 05:03:15,794: 54 conv3d: input_from: [42], output_to: [55], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.4171s
+[rosout][INFO] 2024-09-18 05:03:15,799: 55 batch_norm: input_from: [54], output_to: [56], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.4196s
+[rosout][INFO] 2024-09-18 05:03:15,804: 56 relu: input_from: [55], output_to: [57], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.4210s
+[rosout][INFO] 2024-09-18 05:03:15,808: 57 conv3d: input_from: [56], output_to: [58], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.4945s
+[rosout][INFO] 2024-09-18 05:03:15,813: 58 batch_norm: input_from: [57], output_to: [59], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.4969s
+[rosout][INFO] 2024-09-18 05:03:15,819: 59 add_: input_from: [53, 58], output_to: [60], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.4990s
+[rosout][INFO] 2024-09-18 05:03:15,824: 60 add: input_from: [59, 42], output_to: [61], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.5011s
+[rosout][INFO] 2024-09-18 05:03:15,829: 61 relu: input_from: [60], output_to: [62], output_shapes: [torch.Size([1, 8, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.5025s
+[rosout][INFO] 2024-09-18 05:03:15,834: 62 conv3d: input_from: [61], output_to: [63], output_shapes: [torch.Size([1, 20, 32, 256, 128])], barrier: False, local dim: 4;  accu_time 0.5608s
+[rosout][INFO] 2024-09-18 05:03:15,840: 63 permute: input_from: [62], output_to: [64], output_shapes: [torch.Size([1, 20, 256, 32, 128])], barrier: False, local dim: 4;  accu_time 0.5608s
+[rosout][INFO] 2024-09-18 05:03:15,845: 64 argmax: input_from: [63], output_to: [65], output_shapes: [torch.Size([1, 256, 32, 128])], barrier: False, local dim: 3;  accu_time 0.5631s
+[rosout][INFO] 2024-09-18 05:03:15,849: 65 type: input_from: [64], output_to: [66], output_shapes: [torch.Size([1, 256, 32, 128])], barrier: False, local dim: 3;  accu_time 0.5633s
+[rosout][INFO] 2024-09-18 05:03:15,854: 66 _end: input_from: [65], output_to: [-1], output_shapes: [torch.Size([1, 256, 32, 128])], barrier: True, local dim: None;  accu_time 0.5633s
+[rosout][INFO] 2024-09-18 05:03:15,859: total 67 ops (filtered from 73 ops); time 0.5633s (aligned by 0.9610 sleep_step 1).
+
+[rosout][INFO] 2024-09-18 05:03:15,870: Waiting for graph processing at the server
+[rosout][INFO] 2024-09-18 05:03:15,938: Got graph plan from server
+[rosout][INFO] 2024-09-18 05:03:15,945: client: init forward complete.
+[rosout][INFO] 2024-09-18 05:03:15,958: bw 0MB/s offload at [] recv at [] sleep for 67 ops est time 0.5633s.
+[rosout][INFO] 2024-09-18 05:03:15,966: bw 1MB/s offload at [] recv at [] sleep for 67 ops est time 0.5633s.
+[rosout][INFO] 2024-09-18 05:03:15,972: bw 2MB/s offload at [] recv at [] sleep for 67 ops est time 0.5633s.
+[rosout][INFO] 2024-09-18 05:03:15,977: bw 3MB/s offload at [] recv at [] sleep for 67 ops est time 0.5633s.
+[rosout][INFO] 2024-09-18 05:03:15,983: bw 4MB/s offload at [] recv at [] sleep for 67 ops est time 0.5633s.
+[rosout][INFO] 2024-09-18 05:03:15,988: bw 5MB/s offload at [] recv at [] sleep for 67 ops est time 0.5633s.
+[rosout][INFO] 2024-09-18 05:03:15,994: bw 6MB/s offload at [] recv at [] sleep for 67 ops est time 0.5633s.
+[rosout][INFO] 2024-09-18 05:03:16,000: bw 7MB/s offload at [] recv at [] sleep for 67 ops est time 0.5633s.
+[rosout][INFO] 2024-09-18 05:03:16,005: bw 8MB/s offload at [] recv at [] sleep for 67 ops est time 0.5633s.
+[rosout][INFO] 2024-09-18 05:03:16,011: bw 9MB/s offload at [] recv at [] sleep for 67 ops est time 0.5633s.
+[rosout][INFO] 2024-09-18 05:03:16,016: bw 10MB/s offload at [] recv at [] sleep for 67 ops est time 0.5633s.
+[rosout][INFO] 2024-09-18 05:03:16,024: bw 11MB/s offload at [0, 23] recv at [22, 65] sleep for 0 ops est time 0.5236s.
+[rosout][INFO] 2024-09-18 05:03:16,031: bw 12MB/s offload at [0, 23] recv at [22, 65] sleep for 0 ops est time 0.4854s.
+[rosout][INFO] 2024-09-18 05:03:16,037: bw 13MB/s offload at [0, 23] recv at [22, 65] sleep for 0 ops est time 0.4531s.
+[rosout][INFO] 2024-09-18 05:03:16,045: bw 14MB/s offload at [0, 23] recv at [22, 65] sleep for 0 ops est time 0.4255s.
+[rosout][INFO] 2024-09-18 05:03:16,052: bw 15MB/s offload at [0, 23] recv at [22, 65] sleep for 0 ops est time 0.4015s.
+[rosout][INFO] 2024-09-18 05:03:16,058: bw 16MB/s offload at [0, 23] recv at [22, 65] sleep for 0 ops est time 0.3805s.
+[rosout][INFO] 2024-09-18 05:03:16,066: bw 17MB/s offload at [0, 23] recv at [22, 65] sleep for 0 ops est time 0.3619s.
+[rosout][INFO] 2024-09-18 05:03:16,072: bw 18MB/s offload at [0, 17, 23, 29] recv at [16, 22, 65] sleep for 0 ops est time 0.3634s.
+[rosout][INFO] 2024-09-18 05:03:16,080: bw 19MB/s offload at [0, 17, 23, 29] recv at [16, 22, 65] sleep for 0 ops est time 0.3465s.
+[rosout][INFO] 2024-09-18 05:03:16,086: bw 20MB/s offload at [0, 17, 23, 29] recv at [16, 22, 65] sleep for 0 ops est time 0.3312s.
+[rosout][INFO] 2024-09-18 05:03:16,094: bw 21MB/s offload at [0, 17, 23, 29] recv at [16, 22, 65] sleep for 0 ops est time 0.3175s.
+[rosout][INFO] 2024-09-18 05:03:16,101: bw 22MB/s offload at [0, 17, 23, 29] recv at [16, 22, 65] sleep for 0 ops est time 0.3049s.
+[rosout][INFO] 2024-09-18 05:03:16,110: bw 23MB/s offload at [0, 17, 23, 29] recv at [16, 22, 65] sleep for 0 ops est time 0.2935s.
+[rosout][INFO] 2024-09-18 05:03:16,117: bw 24MB/s offload at [0, 17, 19, 21, 23, 29] recv at [16, 18, 20, 22, 65] sleep for 0 ops est time 0.2686s.
+[rosout][INFO] 2024-09-18 05:03:16,124: bw 25MB/s offload at [0, 17, 19, 21, 23, 29] recv at [16, 18, 20, 22, 65] sleep for 0 ops est time 0.2579s.
+[rosout][INFO] 2024-09-18 05:03:16,131: bw 26MB/s offload at [0, 17, 19, 21, 23, 29] recv at [16, 18, 20, 22, 65] sleep for 0 ops est time 0.2481s.
+[rosout][INFO] 2024-09-18 05:03:16,138: bw 27MB/s offload at [0, 17, 19, 21, 23, 29] recv at [16, 18, 20, 22, 65] sleep for 0 ops est time 0.2389s.
+[rosout][INFO] 2024-09-18 05:03:16,146: bw 28MB/s offload at [0, 17, 19, 21, 23, 29] recv at [16, 18, 20, 22, 65] sleep for 0 ops est time 0.2305s.
+[rosout][INFO] 2024-09-18 05:03:16,154: bw 29MB/s offload at [0, 17, 19, 21, 23, 29] recv at [16, 18, 20, 22, 65] sleep for 0 ops est time 0.2226s.
+[rosout][INFO] 2024-09-18 05:03:16,163: bw 30MB/s offload at [0, 17, 19, 21, 23, 29] recv at [16, 18, 20, 22, 65] sleep for 0 ops est time 0.2152s.
+[rosout][INFO] 2024-09-18 05:03:16,169: Started send loop.
+[rosout][INFO] 2024-09-18 05:03:16,174: Started recv loop.
+[rosout][WARNING] 2024-09-18 05:03:18,186: Waiting for /Start call.
+[rosout][WARNING] 2024-09-18 05:03:20,193: Waiting for /Start call.
+[rosout][WARNING] 2024-09-18 05:03:22,202: Waiting for /Start call.
+[rosout][WARNING] 2024-09-18 05:03:24,209: Waiting for /Start call.
+[rosout][WARNING] 2024-09-18 05:03:26,216: Waiting for /Start call.
+[rosout][WARNING] 2024-09-18 05:03:28,223: Waiting for /Start call.
+[rospy.core][INFO] 2024-09-18 05:13:39,547: signal_shutdown [signal-2]
+[rospy.core][INFO] 2024-09-18 05:13:39,552: signal_shutdown [signal-2]
+[rospy.internal][INFO] 2024-09-18 05:13:39,563: topic[/rosout] removing connection to /rosout
+[rospy.impl.masterslave][INFO] 2024-09-18 05:13:39,566: signal-2
+[rospy.core][INFO] 2024-09-18 05:13:39,569: signal_shutdown [signal-2]
+[rospy.core][INFO] 2024-09-18 05:13:39,569: signal_shutdown [signal-2]
+[rospy.internal][INFO] 2024-09-18 05:13:39,582: topic[/rosout] removing connection to /rosout
+[rospy.core][INFO] 2024-09-18 05:13:39,585: signal_shutdown [signal-2]
+[rospy.core][INFO] 2024-09-18 05:13:39,585: signal_shutdown [signal-2]
+[rospy.impl.masterslave][INFO] 2024-09-18 05:13:39,586: signal-2
